@@ -1,24 +1,25 @@
-# crossecute — brand mark
+# crossecute brand mark
 
 The mark is a lockup: a **check** joined to **spokes fanning out to four nodes**,
 above the wordmark.
 
 - **Check:** the verification step. Nothing moves until what you signed is proven
   to be what was built.
-- **Spokes → nodes:** one origin carrying control outward to every destination
-  chain. Uniform and interchangeable — *any* chain.
+- **Spokes to nodes:** one origin carrying control outward to every destination
+  chain. The nodes are uniform and interchangeable, because *any* chain works.
 
 ## Files
 
 | File | Use |
 |------|-----|
-| `crossecute-icon-white.png` | Dark mark on a white tile — for light backgrounds |
-| `crossecute-icon-black.png` | Light mark on a black tile — for dark backgrounds |
-| `crossecute-avatar-512.png` | Square 512×512 avatar — mark only, no wordmark |
+| `crossecute-icon-white.png` | Dark mark on a white tile, for light backgrounds |
+| `crossecute-icon-black.png` | Light mark on a black tile, for dark backgrounds |
+| `crossecute-avatar-512.png` | Square 512×512 avatar, mark only, no wordmark |
 
-Both are raster PNGs with rounded corners and transparent corner pixels, so they
-sit cleanly on any background. Pick the variant matching the surface behind it,
-or serve both via `<picture>` and `prefers-color-scheme` (see `profile/README.md`).
+All three are raster PNGs with rounded corners and transparent corner pixels, so
+they sit cleanly on any background. Pick the variant matching the surface behind
+it, or serve both via `<picture>` and `prefers-color-scheme` (see
+`profile/README.md`).
 
 ## Palette
 
@@ -37,7 +38,7 @@ GitHub avatars are UI-only, must be raster, and are cropped to a square:
 2. Under **Profile picture**, click **Upload a picture…**
 3. Choose `crossecute-avatar-512.png`, position, and save.
 
-Use the avatar file, not the lockups — the lockups are non-square and their
-wordmark becomes unreadable once GitHub crops and scales them down. The avatar
-is the mark alone at 78% coverage, which stays clear at small sizes and survives
-the circular crop GitHub applies in comment threads and member lists.
+Use the avatar file, not the lockups. The lockups are non-square, and their
+wordmark becomes unreadable once GitHub crops and scales them down. The avatar is
+the mark alone at 78% coverage, which stays clear at small sizes and survives the
+circular crop GitHub applies in comment threads and member lists.
