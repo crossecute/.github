@@ -50,7 +50,7 @@ produced, and was not changed on the way? That gap is where crossecute starts.
 |------|--------------|--------|
 | [**forge-attest**](https://github.com/crossecute/forge-attest) | Proves a submitted Safe transaction is byte for byte the output of a specific Forge script at a pinned commit. It reproduces the script, hashes the result three independent ways, and checks it against the live Safe queue. Chain-agnostic. | ✅ Available |
 | [**forge-attest-example-safe-ops**](https://github.com/crossecute/forge-attest-example-safe-ops) | A reference producer repo: a deterministic Forge script that builds a Safe tx, verified by forge-attest. | ✅ Available |
-| [**protocol**](https://github.com/crossecute/protocol) | The cross-chain executor. One owner holds the same address on every chain, homed on whichever chain they created it on. The half on that home sends; the half on every other chain receives and runs what arrives. Covers account creation, the approval queue, and both message paths, with native bindings for LayerZero, CCIP, Hyperlane, Wormhole, and OP Stack. | 🚧 In progress |
+| [**protocol**](https://github.com/crossecute/protocol) | The cross-chain executor. One owner holds the same address on every chain, homed on whichever chain they created it on. The half on that home sends; the half on every other chain receives and runs what arrives. Covers account creation, the approval map, and both message paths, with native bindings for LayerZero, CCIP, Hyperlane, Wormhole, and OP Stack. | 🚧 In progress |
 
 ## Principles
 
