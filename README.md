@@ -2,7 +2,7 @@
 
 Organization-level defaults and brand assets for **crossecute**.
 
-> **crossecute**: one multisig, on the chain you trust. Control on every other.
+> **crossecute**: one owner, on the chain you trust. Control on every other.
 
 ## Contents
 

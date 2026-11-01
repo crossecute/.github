@@ -5,7 +5,7 @@
   <img src="https://raw.githubusercontent.com/crossecute/.github/main/brand/crossecute-icon-white.png" width="320" alt="crossecute" />
 </picture>
 
-**One multisig, on the chain you trust. Control on every other.**
+**One owner, on the chain you trust. Control on every other.**
 
 </div>
 
@@ -13,15 +13,15 @@
 
 ## The idea
 
-A protocol on many chains ends up running a separate multisig on each one. Every
-one has its own signers, its own nonces, and its own signing steps. Each extra
-place you sign is another place to get phished, send the wrong payload, or lose
-quorum.
+A protocol on many chains ends up running a separate admin account on each one.
+Every one has its own address, its own nonces, and its own steps to act. Each
+extra place you act is another place to get phished, send the wrong payload, or
+lose access.
 
-crossecute reduces that to one signing hub. A single [Safe](https://safe.global)
-holds the authority. The actions it approves are carried to any destination chain
-and run there. You sign once, on the chain you trust most, and the operation lands
-everywhere.
+crossecute reduces that to one owner. The owner can be any address that can make
+a call: an EOA, a multisig, a DAO's governor, or any other contract. The actions
+it sends are carried to any destination chain and run there. You act once, on the
+chain you trust most, and the operation lands everywhere.
 
 You pick which chain that is, and nothing in the protocol favors one. Every chain
 runs the same contracts, so any of them can be a home. The protocol calls each
@@ -32,17 +32,17 @@ conduit's home creates its receiver on the destination, at the same address.
 
 ```mermaid
 flowchart LR
-  script["Forge script<br/>builds the Safe tx"] -->|JSON| attest{{"forge-attest<br/>verifies provenance"}}
-  attest -->|attested| safe[("Safe on its home chain<br/>· the signing hub ·")]
-  safe -->|cross-chain message| a["Receiver · Chain A"]
-  safe -->|cross-chain message| b["Receiver · Chain B"]
-  safe -->|cross-chain message| n["Receiver · Chain N"]
+  owner(["Owner<br/>EOA, multisig, or any contract"]) --> home[("Conduit on its home chain")]
+  home -->|cross-chain message| a["Receiver · Chain A"]
+  home -->|cross-chain message| b["Receiver · Chain B"]
+  home -->|cross-chain message| n["Receiver · Chain N"]
 ```
 
-The hard part is not the messaging. It is trusting what you sign. An operator
-builds a transaction with a script in one repo and submits it to the Safe in
-another. How does a signer know the thing in the queue is exactly what the script
-produced, and was not changed on the way? That gap is where crossecute starts.
+Once every chain answers to one owner, the hard part is trusting what that owner
+approves. For a Safe, an operator builds a transaction with a script in one repo
+and submits it to the Safe in another. How does a signer know the thing in the
+queue is exactly what the script produced, and was not changed on the way?
+forge-attest closes that gap for Safe owners.
 
 ## Building blocks
 
@@ -61,7 +61,10 @@ which protocol pins as submodules.
 
 - **Do not trust, verify.** Every artifact can be rebuilt and checked by anyone.
   Provenance is worked out from the artifact, never asserted.
-- **One signing surface.** Fewer multisigs, fewer nonces, fewer ways to be tricked.
+- **One point of control.** One owner instead of one per chain: fewer accounts,
+  fewer nonces, fewer ways to be tricked.
+- **Any owner.** The protocol authenticates an address, not a wallet type. An
+  EOA, a Safe, a governor, or any other contract can own a conduit.
 - **The anchor is a choice, not a constant.** Each conduit picks its home chain
   when it is created. Centralize where your trust already is.
 - **Composable, not monolithic.** Each piece (provenance, execution, tooling)
