@@ -22,6 +22,7 @@ flowchart LR
 | One signing round for a multichain batch | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
 | Signatures are verified on the destination | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ❌ |
 | One multisig deployed on a home chain only | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ |
+| Rotate signers on one chain to revoke their authority across chains | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ❌ | ❌ |
 | Nested multisig contracts as signers | ✅ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ❌ |
 | Passkey signers | ✅ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ❌ |
 | Supports token-voted proposals | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ❌ | ✅ |
@@ -30,6 +31,8 @@ flowchart LR
 | Use the standard Safe app and hosted signature queue | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ | ❌ |
 
 Destination signature verification refers to the original approvers' signatures. The script row counts tooling supplied by each project. Forge Attest also works with compatible Safe transactions from other workflows.
+
+The rotation row covers authorization of new operations. For crossecute, the check applies to plain mode. Safe-signed receivers must apply the authority update. For Zodiac Bridge and Hyperlane, the check applies to calls authorized by the home Safe. A destination Zodiac Safe's independent owners retain their local authority. MultiGov uses token votes. [crossecute authority updates](https://github.com/crossecute/protocol/blob/main/docs/safe/safe-authority-updates.md)
 
 - **crossecute** works with an existing Safe using standard Safe transactions and Safe's hosted queue. In plain mode the home Safe can verify passkey signatures. With a compatible guard, Safe-signed mode verifies signatures from wallet keys and nested Safes on the destination. A DAO governor or its timelock can own the conduit and dispatch operations approved by token holders. Automatic execution depends on the delivery route. [SDK guide](https://github.com/crossecute/sdk/blob/main/docs/usage.md) · [Safe queue](https://docs.safe.global/core-api/safe-queue-service-reference) · [Safe passkeys](https://docs.safe.global/sdk/signers/passkeys) · [Safe-signed dispatch](https://github.com/crossecute/protocol/blob/main/docs/safe/safe-signed-dispatch.md) · [Message flow](https://github.com/crossecute/protocol/blob/main/docs/architecture/message-flow.md)
 - **Chainlink MCMS** supports nested threshold groups of individual signers. Teams coordinate signing themselves and can add signatures to a proposal file with the SDK. Operators submit execution calls on the target chains. [Signer groups](https://github.com/smartcontractkit/ccip-owner-contracts#manychainmultisig-considerations) · [Signing](https://smartcontractkit.github.io/mcms/usage/signing-proposals/) · [Execution](https://smartcontractkit.github.io/mcms/usage/executing-proposals/)
