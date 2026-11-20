@@ -21,10 +21,10 @@ flowchart LR
 | Execute on multiple chains | ✅ | ✅ | ✅ | ✅ |
 | One signing round for a multichain batch | ✅ | ✅ | ✅ | ✅ |
 | One multisig deployed on a home chain only | ✅ | ❌ | ❌ | ❌ |
-| Nested multisig contracts as signers | ✅ Nested Safes | ❌ Signer groups | ❌ | ✅ Contract signers on each chain |
-| Automatic destination execution from a home-chain dispatch | ✅ With automatic delivery | ❌ | ❌ | ❌ |
-| Rerun a pinned script and verify the resulting transaction by hash | ✅ Forge Attest | ❌ | ❌ | ❌ |
-| Requires a self-hosted signature collection backend | ❌ | ❌ | ❌ Reference flow uses a server | ❌ |
+| Nested multisig contracts as signers | ✅ | ❌ | ❌ | ✅ |
+| Automatic destination execution from a home-chain dispatch | ✅ | ❌ | ❌ | ❌ |
+| Rerun a pinned script and verify the resulting transaction by hash | ✅ | ❌ | ❌ | ❌ |
+| Requires a self-hosted signature collection backend | ❌ | ❌ | ❌ | ❌ |
 
 - **crossecute** uses receivers on each destination. Safe-signed mode verifies nested Safe approvals, and automatic execution depends on the delivery route. [Message flow](https://github.com/crossecute/protocol/blob/main/docs/architecture/message-flow.md) · [Safe-signed dispatch](https://github.com/crossecute/protocol/blob/main/docs/safe/safe-signed-dispatch.md)
 - **Chainlink MCMS** supports nested threshold groups of individual signers. Its SDK collects signatures into a proposal and submits execution calls on the target chains. [Signer groups](https://github.com/smartcontractkit/ccip-owner-contracts#manychainmultisig-considerations) · [Signing](https://smartcontractkit.github.io/mcms/usage/signing-proposals/) · [Execution](https://smartcontractkit.github.io/mcms/usage/executing-proposals/)
