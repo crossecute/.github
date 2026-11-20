@@ -25,7 +25,7 @@ flowchart LR
 | Nested multisig contracts as signers | ✅ | ❌ | ❌ | ✅ |
 | Supports token-voted proposals | ✅ | ❌ | ❌ | ❌ |
 | Automatic destination execution from a home-chain dispatch | ✅ | ❌ | ❌ | ❌ |
-| Rerun a pinned script and verify the resulting transaction by hash | ✅ | ❌ | ❌ | ❌ |
+| Cryptographically verifiable proposal scripts | ✅ | ❌ | ❌ | ❌ |
 | Use the standard Safe app and hosted signature queue | ✅ | ❌ | ❌ | ❌ |
 
 - **crossecute** works with an existing Safe using standard Safe transactions and Safe's hosted queue. With a compatible guard, Safe-signed mode verifies signatures, including nested approvals, on the destination. A DAO governor or its timelock can own the conduit and dispatch operations approved by token holders. Automatic execution depends on the delivery route. [SDK guide](https://github.com/crossecute/sdk/blob/main/docs/usage.md) · [Safe queue](https://docs.safe.global/core-api/safe-queue-service-reference) · [Safe-signed dispatch](https://github.com/crossecute/protocol/blob/main/docs/safe/safe-signed-dispatch.md) · [Message flow](https://github.com/crossecute/protocol/blob/main/docs/architecture/message-flow.md)
