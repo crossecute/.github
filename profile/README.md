@@ -16,7 +16,7 @@ flowchart LR
 
 ✅ Yes · ❌ No in the documented workflow
 
-| Solution | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 |
+| Solution | 1 | 2\* | 3\* | 4 | 5\* | 6 | 7 | 8 | 9 | 10\* | 11 |
 | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | crossecute | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Safe + Hyperlane ICA | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ |
@@ -29,20 +29,16 @@ flowchart LR
 | Aave a.DI | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ | ❌ | ❌ |
 
 1. Execute on multiple chains
-2. One signing round for a multichain batch
-3. Signatures are verified on the destination
+2. One signing round for a multichain batch[^signing-round]
+3. Signatures are verified on the destination[^destination-signatures]
 4. One multisig deployed on a home chain only
-5. Rotate signers on one chain to revoke their authority across chains
+5. Rotate signers on one chain to revoke their authority across chains[^signer-rotation]
 6. Nested multisig contracts as signers
 7. Passkey signers
 8. Supports token-voted proposals
 9. Automatic destination execution from a home-chain dispatch
-10. Cryptographically verifiable proposal scripts
+10. Cryptographically verifiable proposal scripts[^script-verification]
 11. Use the standard Safe app and hosted signature queue
-
-Capability 2 counts a shared signature collection round for the batch. Capability 3 refers to the original approvers' signatures. Capability 10 requires project-supplied tooling that verifies the submitted transaction against a rerun of the proposal script from a pinned source revision. Forge Attest also works with compatible Safe transactions from other workflows.
-
-Capability 5 covers authorization of new operations. For crossecute, the check applies to plain mode. Safe-signed receivers must apply the authority update. For Zodiac Bridge and Hyperlane, the check applies to calls authorized by the home Safe. A destination Zodiac Safe's independent owners retain their local authority. MultiGov and Aave Governance use token votes. [crossecute authority updates](https://github.com/crossecute/protocol/blob/main/docs/safe/safe-authority-updates.md)
 
 - **crossecute** works with an existing Safe using standard Safe transactions and Safe's hosted queue. In plain mode the home Safe can verify passkey signatures. With a compatible guard, Safe-signed mode verifies signatures from wallet keys and nested Safes on the destination. A DAO governor or its timelock can own the conduit and dispatch operations approved by token holders. Automatic execution depends on the delivery route. [SDK guide](https://github.com/crossecute/sdk/blob/main/docs/usage.md) · [Safe queue](https://docs.safe.global/core-api/safe-queue-service-reference) · [Safe passkeys](https://docs.safe.global/sdk/signers/passkeys) · [Safe-signed dispatch](https://github.com/crossecute/protocol/blob/main/docs/safe/safe-signed-dispatch.md) · [Message flow](https://github.com/crossecute/protocol/blob/main/docs/architecture/message-flow.md)
 - **Safe + Hyperlane Interchain Accounts (ICA)** lets a home Safe or DAO governor send calls to a remote account. The destination authenticates the Hyperlane message. [Accounts API](https://github.com/hyperlane-xyz/hyperlane-quickstart#accounts-api) · [Router contract](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/solidity/contracts/middleware/InterchainAccountRouter.sol)
@@ -53,3 +49,11 @@ Capability 5 covers authorization of new operations. For crossecute, the check a
 - **LayerZero OneSig** uses a separate signature collection server in its reference workflow and also documents how to combine signatures locally. An executor submits the signed operation on each target chain. [OneSig protocol](https://github.com/LayerZero-Labs/onesig/blob/main/PROTOCOL.md)
 - **Wormhole MultiGov** tallies token votes from multiple chains on a hub and relays approved operations to their destinations. It authenticates dispatches through Wormhole messages. [Proposal flow](https://wormhole.com/docs/products/multigov/concepts/proposal-flow/)
 - **Aave a.DI (Aave Delivery Infrastructure)** delivers token-approved Aave Governance proposals across chains. The destination a.DI controller confirms messages using a configurable threshold of approved bridge adapters. The governance payload queues on arrival. On supported destination chains, Aave’s Execution Chain Robot automatically submits the separate execution transaction after the timelock. Aave Seatbelt simulates registered payloads across networks. [a.DI architecture](https://github.com/aave-dao/aave-delivery-infrastructure/blob/main/docs/overview.md) · [Aave proposal lifecycle](https://aave.com/docs/ecosystem/governance#onchain-proposal-lifecycle) · [Execution Chain Robot](https://github.com/aave-dao/aave-robots-list/blob/main/ROBOT_DESCRIPTIONS.md#execution-chain-robot) · [Aave Seatbelt](https://github.com/aave-dao/seatbelt-gov-v3)
+
+[^signing-round]: A signing round is a shared signature collection round for the batch.
+
+[^destination-signatures]: Destination signature verification refers to signatures from the original approvers.
+
+[^signer-rotation]: Signer rotation covers authorization of new operations. For crossecute, the check applies to plain mode. Safe-signed receivers must apply the authority update. For Zodiac Bridge and Hyperlane, the check applies to calls authorized by the home Safe. A destination Zodiac Safe's independent owners retain their local authority. MultiGov and Aave Governance use token votes. [crossecute authority updates](https://github.com/crossecute/protocol/blob/main/docs/safe/safe-authority-updates.md)
+
+[^script-verification]: This capability requires project-supplied tooling that verifies the submitted transaction against a rerun of the proposal script from a pinned source revision. Forge Attest also works with compatible Safe transactions from other workflows.
