@@ -26,7 +26,7 @@ flowchart LR
 | Safe + Hyperlane ICA | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ |
 | Standard Safe | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ | ✅ |
 | Wormhole MultiGov | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ | ❌ | ❌ |
-| Aave a.DI | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ |
+| Aave a.DI | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ | ❌ | ❌ |
 
 1. Execute on multiple chains
 2. One signing round for a multichain batch
@@ -52,4 +52,4 @@ Capability 5 covers authorization of new operations. For crossecute, the check a
 - **Safe + Hyperlane Interchain Accounts (ICA)** lets a home Safe or DAO governor send calls to a remote account. The destination authenticates the Hyperlane message. [Accounts API](https://github.com/hyperlane-xyz/hyperlane-quickstart#accounts-api) · [Router contract](https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/solidity/contracts/middleware/InterchainAccountRouter.sol)
 - **Standard Safe** supports nested Safes, passkey owners, and a hosted signature queue. Each chain has its own Safe deployment and approvals, even when the address is shared across chains. [Safe accounts](https://docs.safe.global/advanced/smart-account-overview) · [Multichain deployment](https://docs.safe.global/advanced/smart-account-multi-chain-deployment)
 - **Wormhole MultiGov** tallies token votes from multiple chains on a hub and relays approved operations to their destinations. It authenticates dispatches through Wormhole messages. [Proposal flow](https://wormhole.com/docs/products/multigov/concepts/proposal-flow/)
-- **Aave a.DI (Aave Delivery Infrastructure)** delivers token-approved Aave Governance proposals across chains. The destination a.DI controller confirms messages using a configurable threshold of approved bridge adapters. The governance payload queues on arrival and requires a separate execution call after the destination timelock. [a.DI architecture](https://github.com/aave-dao/aave-delivery-infrastructure/blob/main/docs/overview.md) · [Aave proposal lifecycle](https://aave.com/docs/ecosystem/governance#onchain-proposal-lifecycle)
+- **Aave a.DI (Aave Delivery Infrastructure)** delivers token-approved Aave Governance proposals across chains. The destination a.DI controller confirms messages using a configurable threshold of approved bridge adapters. The governance payload queues on arrival. On supported destination chains, Aave’s Execution Chain Robot automatically submits the separate execution transaction after the timelock. [a.DI architecture](https://github.com/aave-dao/aave-delivery-infrastructure/blob/main/docs/overview.md) · [Aave proposal lifecycle](https://aave.com/docs/ecosystem/governance#onchain-proposal-lifecycle) · [Execution Chain Robot](https://github.com/aave-dao/aave-robots-list/blob/main/ROBOT_DESCRIPTIONS.md#execution-chain-robot)
