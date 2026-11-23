@@ -10,7 +10,7 @@ flowchart LR
 
 - [Protocol](https://github.com/crossecute/protocol) sends instructions from your home chain and runs them on the destination chains.
 - [SDK](https://github.com/crossecute/sdk) simulates the changes and prepares one Safe transaction for review.
-- [Forge Attest](https://github.com/crossecute/forge-attest) reruns your script and checks that its output matches the transaction queued in Safe.
+- [Forge Attest](https://github.com/crossecute/forge-attest) reruns the proposal script and independently verifies that the calls it produced match the exact Safe transaction you’re asked to sign.
 
 ## Multichain multisig and governance comparison
 
